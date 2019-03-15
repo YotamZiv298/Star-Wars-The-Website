@@ -1,0 +1,102 @@
+﻿body
+{
+    background-color: White;
+    background-image: url("Images/BB-8 Background.png");
+    background-attachment: fixed;
+    font-family: Arial;
+}
+
+.Videos
+{
+    border: 7px dotted #ef6410;
+}
+
+.Characters
+{
+    border: 5px groove Red;
+}
+.Planets
+{
+    border: 5px groove Blue;
+}
+
+.QuickView
+{
+    border: 5px groove #0dac21;
+    height: 51px;
+    width: 255px;
+}
+
+.dropbtn
+{
+    /*כפתור שנפתח לעוד*/
+    background-color: #69b9e4;
+    color: Black;
+    padding: 14px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    width: 155px;
+}
+
+.dropbtn-noherf
+{
+    /*כפתור שנפתח לעוד בלי קישור*/
+    background-color: #69b9e4;
+    color: Black;
+    padding: 14px;
+    font-size: 16px;
+    border: none;
+    width: 155px;
+}
+
+.dropdown
+{
+    /*הנפילה למטה*/
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content
+{
+    /*התוכן של הנפילה למטה*/
+    display: none;
+    position: absolute;
+    background-color: #279ad8;
+    min-width: 255px;
+    z-index: 1;
+}
+
+.dropdown-content a
+{
+    color: black;
+    padding: 10px 40px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover
+{
+    background-color: #18638b;
+}
+
+.dropdown:hover .dropdown-content
+{
+    display: block;
+}
+
+
+
+.dropside a
+{
+    position: absolute;
+    padding: 15px;
+    width: 100px;
+    text-decoration: none;
+    color: white;
+}
+
+sidenav a:hover
+{
+    left: 0;
+}

@@ -1,0 +1,227 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>מלחמת הכוכבים - האתר</title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <link rel="Stylesheet" type="text/css" href="StyleSheet.css" />
+    <link rel="icon" href="Images/BB-8 Background.png" />
+    <script type="text/javascript">
+        function CheckLogInForm(LogIn) {
+            if (CheckLogInfield(LogIn.LogInNickName, "שם משתמש") && CheckLogInfield(LogIn.LogInPassword, "סיסמא"))
+                return true;
+            return false;
+        }
+
+        function CheckLogInfield(field, fieldname) {
+            var str = field.value, i;
+
+            if (str == "") {
+                alert("הכנס " + fieldname);
+                field.select();
+                return false;
+            }
+            return true;
+        }
+    </script>
+</head>
+<body dir="rtl" id="content">
+    <center>
+        <table style="border-spacing: 0" width="77%" border="0" dir="rtl">
+            <tr style="background-image: url(Images/space.png)">
+                <td>
+                    <center>
+                        <font color="yellow">שלום
+                            <%=Session["UserName"] %></font></center>
+                    <%if ((string)(Session["UserName"]) == "אורח")
+                      {%>
+                    <form dir="rtl" name="LogIn" action="LoginCheck.aspx" method="post" onsubmit="return CheckLogInForm(this)"
+                    style="font-family: Arial;">
+                    <table border="1" cellpadding="0">
+                        <tr>
+                            <td>
+                                <font color="yellow"><u>כניסה:</u></font>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <font color="yellow">שם משתמש:</font>
+                            </td>
+                            <td class="style1">
+                                <input type="text" id="LogInNickName" name="LogInNickName" maxlength="10" size="7" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <font color="yellow">סיסמא:</font>
+                            </td>
+                            <td class="style1">
+                                <input type="password" id="LogInPassword" name="LogInPassword" maxlength="16" size="7" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <button type="submit" name="Enter">
+                                    התחבר</button>
+                            </td>
+                            <td>
+                                <a href="RegisterForm.aspx">
+                                    <button type="button" name="Sign-Up">
+                                        צור משתמש</button></a>
+                            </td>
+                        </tr>
+                    </table>
+                    </form>
+                    <center>
+                        <font color="yellow">מספר המבקרים באתר:
+                            <%=Application["siteCounter"]%></font></center>
+                    <!--כניסה-->
+                    <%}
+                      else
+                      {
+                    %>
+                    <%
+                        if ((string)(Session["UserName"]) == "Admin")
+                        {
+                    %>
+                    <br />
+                    <center>
+                        <a href="AdminPanel.aspx" style="color: Orange">דף מנהל</a></center>
+                    &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+                    &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+                    <center>
+                        <a href="logOut.aspx" style="color: Red">התנתק</a></center>
+                    &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+                    &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+                    <%    } 
+                    %>
+                    <% 
+                        else
+                        {
+                            if ((string)(Session["UserName"]) != "Admin" && (string)(Session["UserName"]) != "אורח")
+                            {  
+                    %>
+                    <br />
+                    <center>
+                        <a href="ChangeUser.aspx?Nickname=<%=Session["UserName"] %>" style="color: Orange">עריכת פרטים</a></center>
+                    &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+                    &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+                    <center>
+                        <a href="LogOut.aspx" style="color: Red">התנתק</a></center>
+                    &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+                    &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+                    <%} %>
+                    <%}
+                    %>
+                    <center>
+                        <font color="yellow">מספר המבקרים באתר:
+                            <%=Application["siteCounter"]%></font></center>
+                    <%} 
+                    %>
+                </td>
+                <td>
+                    <table border="0" cellpadding="0" dir="rtl" width="100%">
+                        <tr>
+                            <td colspan="9">
+                                <center>
+                                    <a href="Default.aspx">
+                                        <img src="Images/LogoStarWars.png" alt="Website Logo" style="height: 173px; width: 343px" /></a></center>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="dropdown">
+                                    <a href="Default.aspx">
+                                        <button class="dropbtn">
+                                            דף הבית</button></a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="dropdown">
+                                    <a href="GeneralInformation.aspx">
+                                        <button class="dropbtn">
+                                            מידע כללי</button></a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="dropdown">
+                                    <a href="TimeLine.aspx">
+                                        <button class="dropbtn">
+                                            ציר הזמן</button></a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="dropdown">
+                                    <button class="dropbtn-noherf">
+                                        דמויות</button>
+                                    <div class="dropdown-content">
+                                        <a href="Characters 1-3.aspx">הטרילוגיה החדשה</a> <a href="Characters 4-6.aspx">הטרילוגיה
+                                            המקורית</a> <a href="Characters 7-8.aspx">הטרילוגיה ההמשכית</a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="dropdown">
+                                    <a href="Aliens.aspx">
+                                        <button class="dropbtn">
+                                            יצורים</button></a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="dropdown">
+                                    <button class="dropbtn-noherf">
+                                        כוכבים</button>
+                                    <div class="dropdown-content">
+                                        <a href="Planets 1-3.aspx">הטרילוגיה החדשה</a> <a href="Planets 4-6.aspx">הטרילוגיה
+                                            המקורית</a> <a href="Planets 7-8.aspx">הטרילוגיה ההמשכית</a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="dropdown">
+                                    <a href="Technology.aspx">
+                                        <button class="dropbtn">
+                                            טכנולוגיה</button></a>
+                                    <div class="dropdown-content">
+                                        <a href="StarFighters.aspx">כלי רכב וספינות חלל קרביות</a> <a href="Weapons.aspx">כלי
+                                            נשק</a> <a href="Droids.aspx">דרואידים</a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="dropdown">
+                                    <a href="Videos.aspx">
+                                        <button class="dropbtn">
+                                            סרטונים</button></a>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <!--קטגוריות ולוגו-->
+                </td>
+            </tr>
+        </table>
+    </center>
+    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+    </asp:ContentPlaceHolder>
+    <center>
+        <table cellpadding="5" bgcolor="white" width="77%" dir="rtl">
+            <tr>
+                <td>
+                    <center>
+                        <table>
+                            <tr align="center">
+                                <td>
+                                    כל הזכויות שמורות ליותם זיו ©
+                                </td>
+                            </tr>
+                        </table>
+                    </center>
+                </td>
+            </tr>
+        </table>
+    </center>
+</body>
+</html>
